@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            function sendGet(){
+                var form = document.getElementById("form_info");
+                // form.name.value
+                // form.age.value
+                axios({
+                    method: "get",
+                    url: "/form",
+                    params: {name: form.name.value}
+                }).then(function(res){
+                    // res.data = { msg: ~~~ }
+                    alert(res.data.msg);
+                }); 
+            }
+            function sendPost(){
+                var form = document.getElementById("form_info");
+                axios({
+                    method: "post",
+                    url: "/form",
+                    data: {name: form.name.value}
+                }).then(function(res){
+                    alert(res.data.msg);
+                }); 
+            }
+            
+            function login(){
+                var form = document.getElementById("form_login");
+                axios({
+                    method: "post",
+                    url: "/login",
+                    data: {id: form.id.value, pw: form.pw.value}
+                }).then(function(res){
+                    document.querySelector("#result").innerHTML = res.data;
+                }); 
+            }
+        </script>
+    </head>
+    <body>
+        <button type="button" onclick="sendGet()">get</button>
+        <button type="button" onclick="sendPost()">post</button>
+        <form id="form_info">
+            <input type="text" name="name">
+        </form>
+
+        <br><br><br><br>
+        <form id="form_login">
+            아이디 : <input type="text" name="id"><br>
+            비밀번호 : <input type="password" name="pw"><br>
+            <button type="button" onclick="login();">로그인</button>
+            <div style="text-align:center;" id="result"></div>
+        </form>
+    </body>
+</html>
