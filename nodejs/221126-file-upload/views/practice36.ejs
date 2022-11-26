@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Practice35-register</title>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <script>
+            function register(){
+                var form = document.getElementById("form_register");
+                var formData = new FormData(form);
+                // formData를 만들 때 기본값으로 form을 보내면 현재 form에 세팅된 값으로 formData 객체가 만들어진다.
+
+                axios({
+                    method: "post",
+                    url: "/register2",
+                    data: formData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then((a) => { return a.data; })
+                .then((d) => {
+                    document.querySelector("img").src = d.path;
+                });
+            }
+        </script>
+    </head>
+
+    <body>
+        <form id="form_register" enctype="multipart/form-data">
+            <fieldset style="width:300px;">
+                <legend> 개인 정보 </legend>
+                아이디 : <input type="text" name="id"><br>
+                비밀번호 : <input type="password" name="pw"><br>
+                이름 : <input type="text" name="name"><br>
+                나이 : <input type="text" name="age"><br>
+            </fieldset>
+            <input type="file" name="userfile">
+            <button type="button" onclick="register();">회원가입</button>
+        </form>
+        <br>
+        <img>
+    </body>
+</html>
