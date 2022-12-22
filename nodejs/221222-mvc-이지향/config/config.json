@@ -1,0 +1,9 @@
+{
+    "development": {
+        "host": "101.101.210.132",
+        "database": "fridge",
+        "username": "user2",
+        "password": "1234",
+        "dialect": "mysql"
+    }
+}
