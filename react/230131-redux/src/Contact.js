@@ -14,14 +14,20 @@ export default function Contact() {
         setList([...list, newList]);
     }
 
-    function getDB() {
-        axios.get("/")
+    function getServerCORS() {
+        axios.get("http://localhost:8080/")
+        .then((res) => {
+            console.log( res.data );
+        })
+    }
+    function getServerProxy() {
+        axios.get("/api/")
         .then((res) => {
             console.log( res.data );
         })
     }
 
-    function writeDB() {
+    function writeCORS() {
         let form = document.getElementById("form_write");
         let newList = {
             writer: form.writer.value,
@@ -33,14 +39,28 @@ export default function Contact() {
         });
     }
 
+
+    function writeProxy() {
+        let form = document.getElementById("form_write");
+        let newList = {
+            writer: form.writer.value,
+            title: form.title.value
+        };
+        axios.post("/api/", newList)
+        .then((res) => {
+            alert(res.data)
+        });
+    }
     return (
         <div>
             <form id="form_write" style={{marginBottom: '15px'}}>
                 <input type="text" name="writer" placeholder='작성자' />
                 <input type="text" name="title" placeholder='제목' />
-                <button type='button' onClick={getDB}>console로 가져오기</button>
+                <button type='button' onClick={getServerCORS}>no-proxy</button>
+                <button type='button' onClick={getServerProxy}>with-proxy</button>
                 <button type='button' onClick={writeList}>작성</button>
-                <button type='button' onClick={writeDB}>DB작성</button>
+                <button type='button' onClick={writeCORS}>작성 no proxy</button>
+                <button type='button' onClick={writeProxy}>작성 with proxy</button>
             </form>
 
             <table border={1}>
