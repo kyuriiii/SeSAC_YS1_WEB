@@ -1,14 +1,9 @@
 version: "3"
 
 services:
-  deploy-test:
+  deploy:
     container_name: deploy-green
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        ENV_VARIABLE: ${ENV_VARIABLE}
-        NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    image: 24you/docker-green
     restart: always
     ports:
       - 8882:8000

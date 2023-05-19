@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  deploy:
+    container_name: deploy-blue
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ENV_VARIABLE: ${ENV_VARIABLE}
+        NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    restart: always
+    ports:
+      - 8881:8000
